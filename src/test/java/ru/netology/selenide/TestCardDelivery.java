@@ -1,6 +1,7 @@
 package ru.netology.selenide;
 
 
+import com.codeborne.selenide.Browser;
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -22,8 +23,11 @@ class TestCardDelivery {
     private String generateDate(int addDays, String pattern) {
         return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
+
     @Test
+    <gradlew>
     void shouldTestVPositive() {
+        gradlew test -Dselenide.headless=true;
         open("http://localhost:9999");
         $("span[data-test-id=city] input").setValue("Москва");
         String currentDate = generateDate(3, "dd.MM.yyyy");
