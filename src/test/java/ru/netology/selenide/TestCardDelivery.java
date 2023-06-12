@@ -27,7 +27,7 @@ class TestCardDelivery {
     @Test
     <gradlew>
     void shouldTestVPositive() {
-        gradlew test -Dselenide.headless=true;
+
         open("http://localhost:9999");
         $("span[data-test-id=city] input").setValue("Москва");
         String currentDate = generateDate(3, "dd.MM.yyyy");
