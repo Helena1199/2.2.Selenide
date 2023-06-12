@@ -25,7 +25,6 @@ class TestCardDelivery {
     }
 
     @Test
-    <gradlew>
     void shouldTestVPositive() {
         Configuration.headless = true;
         open("http://localhost:9999");
