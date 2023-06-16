@@ -16,14 +16,13 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class TestCardDelivery {
+class TestCardDelivery<gradlew> {
     private String generateDate(int addDays, String pattern) {
         return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
 
     @Test
     void shouldTestVPositive() {
-        Configuration.headless = true;
         open("http://localhost:9999");
         $("span[data-test-id=city] input").setValue("Москва");
         String currentDate = generateDate(3, "dd.MM.yyyy");
@@ -33,6 +32,8 @@ class TestCardDelivery {
         $("span[data-test-id=phone] input").setValue("+79012345678");
         $("[data-test-id=agreement]").click();
         $$("button").find(exactText("Забронировать")).click();
-        $x("//div[contains(text(), 'Встреча успешно забронирована на ')]").shouldBe(visible, Duration.ofSeconds(15));
+        $(".notification__content")
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.exactText("Встреча успешно забронирована на " + currentDate));
     }
 }
